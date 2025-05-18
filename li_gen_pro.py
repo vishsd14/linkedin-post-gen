@@ -61,7 +61,7 @@ Your goal is to educate, inspire trust, and spark meaningful conversations among
 """
     try:
         response = openai.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4.0",
             messages=[{"role": "user", "content": prompt}],
             temperature=0.7
         )
