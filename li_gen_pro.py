@@ -1,32 +1,7 @@
 import openai
-import os
-import pandas as pd
-import gspread
-from google.oauth2.service_account import Credentials
-#from dotenv import load_dotenv
-
 import streamlit as st
+
 openai.api_key = st.secrets["OPENAI_API_KEY"]
-
-# Set your Google Sheet and worksheet details
-#GOOGLE_SHEET_ID = "14st8t45SC9EfqY5Pv4buZ_xA9mdCs6X1xAxGvL3_Y0Q"
-#WORKSHEET_NAME = "Sheet2"
-
-# Google Sheets setup
-def connect_to_google_sheet(sheet_id, worksheet_name):
-    scope = [
-        'https://www.googleapis.com/auth/spreadsheets',
-        'https://www.googleapis.com/auth/drive'
-    ]
-    creds = Credentials.from_service_account_file('seo-agents-452809-a76c4931190d.json', scopes=scope)
-    client = gspread.authorize(creds)
-
-    sheet = client.open_by_key(sheet_id)
-    worksheet = sheet.worksheet(worksheet_name)
-
-    print(f"Connected to sheet: {worksheet.title}")
-    print(f"Sheet URL: https://docs.google.com/spreadsheets/d/{sheet.id}")
-    return worksheet
 
 def generate_post(custom_bio, topic, tone, persona, mode="full", real_life_note="", style_note="", post_type=""):
     prompt = f"""
@@ -54,7 +29,7 @@ Post Structure:
 
 1. **Hook**:
    - Start with a bold, sharp observation or challenge.
-   - No labels like "Problem" — just real, provocative statements.
+   - No labels like \"Problem\" — just real, provocative statements.
    - 1–2 lines max, designed to make the reader stop and think.
 
 2. **Context**:
@@ -72,7 +47,7 @@ Post Structure:
 
 5. **Call to Reflection**:
    - End with a thought-provoking, reflective question.
-   - Example: "What’s one shift you’ve made that changed everything?"
+   - Example: \"What’s one shift you’ve made that changed everything?\"
 
 ---
 Style Instructions:
@@ -85,13 +60,12 @@ Important:
 Your goal is to educate, inspire trust, and spark meaningful conversations among professionals — not sell or motivate artificially.
 """
     try:
-        response = openai.chat.completions.create(
-            model="gpt-4-1106-preview",
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
             messages=[{"role": "user", "content": prompt}],
             temperature=0.7
         )
-        post = response.choices[0].message.content.strip()
-        return post
+        return response.choices[0].message.content.strip()
     except Exception as e:
         print(f"Error generating post: {e}")
         return None
