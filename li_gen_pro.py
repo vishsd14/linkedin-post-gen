@@ -60,7 +60,7 @@ Important:
 Your goal is to educate, inspire trust, and spark meaningful conversations among professionals — not sell or motivate artificially.
 """
     try:
-        response = openai.ChatCompletion.create(
+        response = openai.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[{"role": "user", "content": prompt}],
             temperature=0.7
