@@ -9,8 +9,8 @@ import streamlit as st
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 # Set your Google Sheet and worksheet details
-GOOGLE_SHEET_ID = "14st8t45SC9EfqY5Pv4buZ_xA9mdCs6X1xAxGvL3_Y0Q"
-WORKSHEET_NAME = "Sheet2"
+#GOOGLE_SHEET_ID = "14st8t45SC9EfqY5Pv4buZ_xA9mdCs6X1xAxGvL3_Y0Q"
+#WORKSHEET_NAME = "Sheet2"
 
 # Google Sheets setup
 def connect_to_google_sheet(sheet_id, worksheet_name):
