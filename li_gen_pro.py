@@ -3,11 +3,10 @@ import os
 import pandas as pd
 import gspread
 from google.oauth2.service_account import Credentials
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 
-# Load environment variables
-load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
+import streamlit as st
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 # Set your Google Sheet and worksheet details
 GOOGLE_SHEET_ID = "14st8t45SC9EfqY5Pv4buZ_xA9mdCs6X1xAxGvL3_Y0Q"
